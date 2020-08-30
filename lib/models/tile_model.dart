@@ -197,7 +197,7 @@ class _TileModelState extends State<TileModel> {
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
         text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n'
-            + '"' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+            + '"' + dataState.list[index].full_title + ': ' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
   }
 
   void showSnackBar(BuildContext context) {
