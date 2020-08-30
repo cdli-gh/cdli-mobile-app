@@ -132,7 +132,7 @@ class _ListTileModelState extends State<ListTileModel> {
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
                               onPressed: (){
-                                share(thumbnail, short_info);
+                                share(thumbnail, short_info, title);
                               },
                               child: Text('Share', style: TextStyle(
                                 color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
@@ -199,14 +199,14 @@ class _ListTileModelState extends State<ListTileModel> {
       },);
   }
 
-  void share(String thumbnail, String short_info) async {
+  void share(String thumbnail, String short_info, String title) async {
     var request = await HttpClient().getUrl(Uri.parse(thumbnail));
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
         text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n'
-            + '"' + short_info + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+            + '"' + title + ': ' + short_info + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
   }
 
   void showSnackBar(BuildContext context) {
