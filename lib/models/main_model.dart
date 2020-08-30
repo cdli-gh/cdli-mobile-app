@@ -74,6 +74,8 @@ class _MainModelState extends State<MainModel> {
         return SlidingUpPanel(
           renderPanelSheet: false,
           backdropEnabled: true,
+          parallaxEnabled: true,
+          parallaxOffset: 0.35,
           borderRadius: radius,
           panel: Container(
             decoration: BoxDecoration(
@@ -97,7 +99,7 @@ class _MainModelState extends State<MainModel> {
                       child: Column(
                         children: <Widget>[
                           Html(
-                           data: dataState.list[index].full_info,
+                            data: dataState.list[index].full_info,
                             defaultTextStyle: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'NotoSansJP',
@@ -110,24 +112,24 @@ class _MainModelState extends State<MainModel> {
                               }
                             },
                           ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: ButtonTheme(
-                          minWidth: 330.0,
-                          height: 50.0,
-                            child: RaisedButton(
-                              color: Color.fromRGBO(18, 18, 18, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              onPressed: (){
-                                share(index);
-                              },
-                              child: Text('Share', style: TextStyle(
-                                color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
-                                fontWeight: FontWeight.w400,), textAlign: TextAlign.center),
-                            ),),
-                      ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0),
+                            child: ButtonTheme(
+                              minWidth: 330.0,
+                              height: 50.0,
+                              child: RaisedButton(
+                                color: Color.fromRGBO(18, 18, 18, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                onPressed: (){
+                                  share(index);
+                                },
+                                child: Text('Share', style: TextStyle(
+                                  color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
+                                  fontWeight: FontWeight.w400,), textAlign: TextAlign.center),
+                              ),),
+                          ),
                         ],
                       ),
                     ),
@@ -152,25 +154,25 @@ class _MainModelState extends State<MainModel> {
                     children: <Widget>[
                       Center(
                           child: Icon(
-                        Icons.maximize,
-                        color: Colors.white,
-                        size: 25,
-                      ))
+                            Icons.maximize,
+                            color: Colors.white,
+                            size: 25,
+                          ))
                     ],
                   ),
                   Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(dataState.list[index].full_title,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15.5,
-                                fontFamily: 'NotoSansJP',
-                                fontWeight: FontWeight.w400,
-                              ))
-                        ],
-                      ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(dataState.list[index].full_title,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.5,
+                            fontFamily: 'NotoSansJP',
+                            fontWeight: FontWeight.w400,
+                          ))
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -181,9 +183,9 @@ class _MainModelState extends State<MainModel> {
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(
-                android: (_) => MaterialProgressIndicatorData(),
-                ios: (_) => CupertinoProgressIndicatorData(radius: 25),
-              ))),
+                        android: (_) => MaterialProgressIndicatorData(),
+                        ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+                      ))),
             ),
           ),
         );
@@ -199,7 +201,7 @@ class _MainModelState extends State<MainModel> {
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
         text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n'
-            + '"' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+            + '"' + dataState.list[index].full_title + ': ' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
   }
 
   void showSnackBar(BuildContext context) {
