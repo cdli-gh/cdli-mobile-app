@@ -76,7 +76,7 @@ class _GridModelState extends State<GridModel> {
                 children: <Widget>[
                   Icon(Icons.grid_on, color: Colors.white, size: 22,),
                   SizedBox(width: 10,),
-                  Text('Artifacts displayed in grid layout', style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'NotoSansJP',
+                  Text('Artifacts sorted by date', style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'NotoSansJP',
                     fontWeight: FontWeight.w400,)),
                 ],
               ),
