@@ -50,7 +50,7 @@ class Menu extends StatelessWidget {
                       onMenuItemClicked();
                     },
                     child: Text(
-                      'Page Layout',
+                      'Home',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
