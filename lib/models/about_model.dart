@@ -41,13 +41,22 @@ class _AboutModelState extends State<AboutModel> {
                 scrollDirection: Axis.vertical,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 10.0),
-                  child: Text('This app curates highlighted objects from the CDLI collection. '
-                      'Entries are written by experts in the field. New highlights are available '
-                      'each day, and links are included to find more information on the CDLI website. '
-                      'You can share entries via social media if you want to show a particular object '
-                      'to others. Any feedback should be submitted via the menu in the navigation menu on the left.',
-                            style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
-                              fontWeight: FontWeight.w400,)),
+                  child: Column(
+                    children: <Widget>[
+                      Text('This app curates highlighted objects from the CDLI collection. '
+                          'Entries are written by experts in the field. New highlights are available '
+                          'each day, and links are included to find more information on the CDLI website. ',
+                          style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
+                                  fontWeight: FontWeight.w400,)),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text('You can share entries via social media if you want to show a particular object '
+                          'to others. Any feedback should be submitted via the menu in the navigation menu on the left.',
+                          style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
+                            fontWeight: FontWeight.w400,)),
+                    ],
+                  ),
                         ),
                       ),
                     ),
