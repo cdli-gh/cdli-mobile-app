@@ -9,15 +9,15 @@ class DashboardModel extends StatelessWidget {
   final Function onMenuTap;
   final Widget child;
 
-  const DashboardModel({
-    Key key,
-    this.isCollapsed,
-    this.screenWidth,
-    this.duration,
-    this.scaleAnimation,
-    this.onMenuTap,
-    this.child
-  }) : super(key: key);
+  const DashboardModel(
+      {Key key,
+      this.isCollapsed,
+      this.screenWidth,
+      this.duration,
+      this.scaleAnimation,
+      this.onMenuTap,
+      this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
