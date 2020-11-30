@@ -27,6 +27,23 @@ A detailed guide for multiple platforms setup could be find [here](https://flutt
 - `flutter pub get` to get all the dependencies.
 - `flutter run`
  ----------------------------------------------------------------------------------------
+ ## Screenshots
+
+<p>
+<img src="https://user-images.githubusercontent.com/75270362/100652071-6641b980-336c-11eb-96b3-f3009edf058e.jpg" alt="Splash View" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652080-6772e680-336c-11eb-8fc7-e12a3558f4ea.jpg" alt="Page Layout" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652081-68a41380-336c-11eb-82e4-1c89e08d7926.jpg" alt="Information" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652085-693caa00-336c-11eb-82f4-6295b459542d.jpg" alt="NavDrawer View" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652086-693caa00-336c-11eb-87ce-aeb48614238f.jpg" alt="Grid Layout" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652089-69d54080-336c-11eb-9114-8ae39450fdd7.jpg" alt="List Layout" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652092-6a6dd700-336c-11eb-95ad-3e5841d24acf.jpg" alt="Help and Feedback" width="200">
+<img src="https://user-images.githubusercontent.com/75270362/100652094-6a6dd700-336c-11eb-8844-39745abb48e1.jpg" alt="search bar" width="200">
+</p>
+
+
+-------------------------------------------------------------------------------------------------
+
+
 ## Community
 
 We would love to hear from you! We communicate on the following platforms:
