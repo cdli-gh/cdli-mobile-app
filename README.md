@@ -11,6 +11,22 @@ highly-customized UX. CDLI tablet app will be accessible for both Android and iO
 
 https://summerofcode.withgoogle.com/projects/#5115652567728128
 
+
+## Getting Started
+
+Follow these instructions to build and run the project
+
+### Setup Flutter
+
+A detailed guide for multiple platforms setup could be find [here](https://flutter.dev/docs/get-started/install/)
+
+### Next Steps
+
+- Clone this repository.
+- `cd` into `cdli-mobile-app`.
+- `flutter pub get` to get all the dependencies.
+- `flutter run`
+
 <b>Organization:</b> Cuneiform Digital Library Initiative (CDLI)<br>
 <b>Mentors:</b> M. Willis Monroe
 
