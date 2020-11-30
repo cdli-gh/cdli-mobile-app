@@ -26,6 +26,18 @@ A detailed guide for multiple platforms setup could be find [here](https://flutt
 - `cd` into `cdli-mobile-app`.
 - `flutter pub get` to get all the dependencies.
 - `flutter run`
+ 
+## Community
+
+We would love to hear from you! We communicate on the following platforms:
+
+[![Slack](https://img.shields.io/badge/chat-on_slack-purple.svg?style=for-the-badge&logo=slack)](https://digcuneiform.slack.com/?redir=%2Farchives%2FC5335T03U)
+
+## Contributing
+
+Whether you have some feauture requests/ideas, code improvements, refactoring, performance improvements, help is always Welcome. The more is done, better it gets.
+
+If you found any bugs, consider opening an [issue](https://github.com/cdli-gh/cdli-mobile-app/issues/new).
 
 <b>Organization:</b> Cuneiform Digital Library Initiative (CDLI)<br>
 <b>Mentors:</b> M. Willis Monroe
