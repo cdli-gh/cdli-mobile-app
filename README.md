@@ -48,7 +48,7 @@ A detailed guide for multiple platforms setup could be find [here](https://flutt
 
 We would love to hear from you! We communicate on the following platforms:
 
-[![Slack](https://img.shields.io/badge/chat-on_slack-purple.svg?style=for-the-badge&logo=slack)](https://digcuneiform.slack.com/?redir=%2Farchives%2FC5335T03U)
+[![Slack](https://img.shields.io/badge/chat-on_slack-purple.svg?style=for-the-badge&logo=slack)](https://docs.google.com/forms/d/e/1FAIpQLSeHPVb0actA8DDE1NFLgDCCYs2F2HbYy563MJFJcbFYyy3ivQ/viewform)
 
 ## Contributing
 
