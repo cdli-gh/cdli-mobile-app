@@ -4,13 +4,15 @@ import 'package:cdli_tablet_app/screens/grid_screen.dart';
 import 'package:cdli_tablet_app/screens/list_screen.dart';
 import 'package:cdli_tablet_app/screens/about_screen.dart';
 import 'package:cdli_tablet_app/screens/help_screen.dart';
+import 'package:cdli_tablet_app/screens/recently_viewed_screen.dart';
 
 enum NavigationEvents {
   DashboardClickedEvent,
   GridClickedEvent,
   ListClickedEvent,
   AboutClickedEvent,
-  HelpClickedEvent
+  HelpClickedEvent,
+  RecentlyViewedClickedEvent,
 }
 
 abstract class NavigationState {}
@@ -22,8 +24,8 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationState> {
 
   @override
   NavigationState get initialState => MainScreen(
-    onMenuTap: onMenuTap,
-  );
+        onMenuTap: onMenuTap,
+      );
 
   @override
   Stream<NavigationState> mapEventToState(NavigationEvents event) async* {
@@ -53,6 +55,10 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationState> {
           onMenuTap: onMenuTap,
         );
         break;
+      case NavigationEvents.RecentlyViewedClickedEvent:
+        yield RecentlyViewedScreen(
+          onMenuTap: onMenuTap,
+        );
     }
   }
 }

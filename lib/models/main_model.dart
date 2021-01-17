@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cdli_tablet_app/services/recently_viewed_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
@@ -18,7 +19,6 @@ class MainModel extends StatefulWidget {
 }
 
 class _MainModelState extends State<MainModel> {
-
   final cdliDataState dataState = new cdliDataState();
 
   @override
@@ -72,6 +72,8 @@ class _MainModelState extends State<MainModel> {
       itemCount: dataState.list.length,
       itemBuilder: (BuildContext context, int index) {
         return SlidingUpPanel(
+          onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
+              dataState.list[index].full_title),
           renderPanelSheet: false,
           backdropEnabled: true,
           parallaxEnabled: true,
@@ -122,13 +124,19 @@ class _MainModelState extends State<MainModel> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16.0),
                                 ),
-                                onPressed: (){
+                                onPressed: () {
                                   share(index);
                                 },
-                                child: Text('Share', style: TextStyle(
-                                  color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
-                                  fontWeight: FontWeight.w400,), textAlign: TextAlign.center),
-                              ),),
+                                child: Text('Share',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontFamily: 'NotoSansJP',
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    textAlign: TextAlign.center),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -154,10 +162,10 @@ class _MainModelState extends State<MainModel> {
                     children: <Widget>[
                       Center(
                           child: Icon(
-                            Icons.maximize,
-                            color: Colors.white,
-                            size: 25,
-                          ))
+                        Icons.maximize,
+                        color: Colors.white,
+                        size: 25,
+                      ))
                     ],
                   ),
                   Row(
@@ -183,9 +191,9 @@ class _MainModelState extends State<MainModel> {
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(
-                        android: (_) => MaterialProgressIndicatorData(),
-                        ios: (_) => CupertinoProgressIndicatorData(radius: 25),
-                      ))),
+                android: (_) => MaterialProgressIndicatorData(),
+                ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+              ))),
             ),
           ),
         );
@@ -200,8 +208,17 @@ class _MainModelState extends State<MainModel> {
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
-        text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n'
-            + '"' + dataState.list[index].full_title + ': ' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+        text:
+            'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
+                '"' +
+                dataState.list[index].full_title +
+                ': ' +
+                dataState.list[index].blurb +
+                '"' +
+                "\n\n" +
+                'Information about the iPad and Android apps: ' +
+                'https://cdli.ucla.edu/?q=cdli-tablet' +
+                "\n");
   }
 
   void showSnackBar(BuildContext context) {
