@@ -41,7 +41,6 @@ Widget closeApp(BuildContext context) {
           ),
         ),
         onPressed: () {
-          //SystemNavigator.pop();
           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         },
       ),

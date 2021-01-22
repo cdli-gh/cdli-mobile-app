@@ -1,4 +1,5 @@
 import 'package:cdli_tablet_app/constants/close_screen.dart';
+import 'package:cdli_tablet_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/about_model.dart';
 import 'package:cdli_tablet_app/routes/menu.dart';
@@ -18,14 +19,7 @@ class AboutScreen extends StatelessWidget with NavigationState {
         backgroundColor: Colors.black,
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
-            'cdli tablet',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'NotoSansJP',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          title: kAppBarTitle,
           backgroundColor: Colors.black,
           leading: InkWell(
             child: Icon(Icons.menu, color: Colors.white),

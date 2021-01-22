@@ -1,4 +1,5 @@
 import 'package:cdli_tablet_app/constants/close_screen.dart';
+import 'package:cdli_tablet_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/menu_dashboard_model.dart';
 import 'package:cdli_tablet_app/models/intro_model.dart';
@@ -50,14 +51,7 @@ class IntroScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
-            'cdli tablet',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'NotoSansJP',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          title: kAppBarTitle,
           backgroundColor: Colors.black,
           actions: <Widget>[
             IconButton(
