@@ -1,3 +1,4 @@
+import 'package:cdli_tablet_app/constants/constants.dart';
 import 'package:cdli_tablet_app/services/recently_viewed_state.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/list_tile_model.dart';
@@ -41,14 +42,7 @@ class _ListTileScreenState extends State<ListTileScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(
-          'cdli tablet',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'NotoSansJP',
-            fontWeight: FontWeight.w400,
-          ),
-        ),
+        title: kAppBarTitle,
         backgroundColor: Colors.black,
         leading: PlatformIconButton(
           android: (_) => MaterialIconButtonData(
