@@ -8,7 +8,13 @@ class Menu extends StatelessWidget {
   final int selectedIndex;
   final Function onMenuItemClicked;
 
-  const Menu({Key key, this.slideAnimation, this.menuAnimation, this.selectedIndex, @required this.onMenuItemClicked}) : super(key: key);
+  const Menu(
+      {Key key,
+      this.slideAnimation,
+      this.menuAnimation,
+      this.selectedIndex,
+      @required this.onMenuItemClicked})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +52,8 @@ class Menu extends StatelessWidget {
                   ),
                   title: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.DashboardClickedEvent);
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvents.DashboardClickedEvent);
                       onMenuItemClicked();
                     },
                     child: Text(
@@ -61,40 +68,68 @@ class Menu extends StatelessWidget {
                   ),
                 ),
                 // Grid View
-                ListTile(leading: Icon(
-                  Icons.grid_on,
-                  color: Colors.white,
-                  size: 22,
-                ),
-                title: GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.GridClickedEvent);
-                    onMenuItemClicked();
-                  },
-                  child: Text(
-                    'Grid Layout',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontFamily: 'NotoSansJP',
-                      fontWeight: FontWeight.w400,
+                ListTile(
+                  leading: Icon(
+                    Icons.grid_on,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                  title: GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvents.GridClickedEvent);
+                      onMenuItemClicked();
+                    },
+                    child: Text(
+                      'Grid Layout',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSansJP',
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
-                ),
                 // List View
-                ListTile(leading: Icon(
-                  Icons.sort_by_alpha,
-                  color: Colors.white,
-                  size: 22,
-                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.sort_by_alpha,
+                    color: Colors.white,
+                    size: 22,
+                  ),
                   title: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ListClickedEvent);
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvents.ListClickedEvent);
                       onMenuItemClicked();
                     },
                     child: Text(
                       'List Layout',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'NotoSansJP',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+                //Recently View Artifacts
+                ListTile(
+                  leading: Icon(
+                    Icons.history,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                  title: GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvents.RecentlyViewedClickedEvent);
+                      onMenuItemClicked();
+                    },
+                    child: Text(
+                      'Recently Viewed',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -110,14 +145,16 @@ class Menu extends StatelessWidget {
                   color: Colors.white,
                   thickness: 0.28,
                 ),
-                ListTile(leading: Icon(
-                  Icons.info_outline,
-                  color: Colors.white,
-                  size: 22,
-                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.info_outline,
+                    color: Colors.white,
+                    size: 22,
+                  ),
                   title: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.AboutClickedEvent);
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvents.AboutClickedEvent);
                       onMenuItemClicked();
                     },
                     child: Text(
@@ -132,14 +169,16 @@ class Menu extends StatelessWidget {
                   ),
                 ),
                 // Help and Feedback
-                ListTile(leading: Icon(
-                  Icons.help_outline,
-                  color: Colors.white,
-                  size: 22,
-                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.help_outline,
+                    color: Colors.white,
+                    size: 22,
+                  ),
                   title: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HelpClickedEvent);
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(NavigationEvents.HelpClickedEvent);
                       onMenuItemClicked();
                     },
                     child: Text(
