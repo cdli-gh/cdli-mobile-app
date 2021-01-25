@@ -1,4 +1,5 @@
 import 'package:cdli_tablet_app/constants/constants.dart';
+import 'package:cdli_tablet_app/services/recently_viewed_state.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/list_tile_model.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -29,6 +30,12 @@ class _ListTileScreenState extends State<ListTileScreen> {
 
   _ListTileScreenState(
       this.title, this.image, this.info, this.thumbnail, this.short_info);
+
+  @override
+  void initState() {
+    RecentlyViewedState.addItemToViewHistory(title);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
