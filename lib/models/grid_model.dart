@@ -10,7 +10,7 @@ class GridModel extends StatefulWidget {
 }
 
 class _GridModelState extends State<GridModel> {
-  final cdliDataState dataState = new cdliDataState();
+  final CDLIDataState dataState = new CDLIDataState();
 
   @override
   void initState() {

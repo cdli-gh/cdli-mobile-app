@@ -4,13 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RecentlyViewedState {
   static SharedPreferences _pref;
 
-  static Future<List<cdliData>> getLastViewedItems(
-      List<cdliData> originalItems) async {
+  static Future<List<CDLIData>> getLastViewedItems(
+      List<CDLIData> originalItems) async {
     _pref = await SharedPreferences.getInstance();
     List<String> viewedItemIds = _pref.getStringList('last-viewed') ?? [];
     List lastViewedItems = viewedItemIds
         .map((title) =>
-            originalItems.firstWhere((item) => item.full_title == title))
+            originalItems.firstWhere((item) => item.fullTitle == title))
         .toList();
     return lastViewedItems;
   }

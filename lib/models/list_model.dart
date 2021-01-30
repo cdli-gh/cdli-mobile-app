@@ -10,7 +10,7 @@ class ListModel extends StatefulWidget {
 }
 
 class _ListModelState extends State<ListModel> {
-  final cdliDataState dataState = new cdliDataState();
+  final CDLIDataState dataState = new CDLIDataState();
 
   @override
   void initState() {
@@ -117,7 +117,7 @@ class _ListModelState extends State<ListModel> {
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
                           title: Text(
-                            dataState.list[index].full_title,
+                            dataState.list[index].fullTitle,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'NotoSansJP',
@@ -157,10 +157,10 @@ class _ListModelState extends State<ListModel> {
                           ),
                           onTap: () {
                             navigateToDetailScreen(
-                              dataState.list[index].full_title,
+                              dataState.list[index].fullTitle,
                               dataState.list[index].url,
-                              dataState.list[index].full_info,
-                              dataState.list[index].thumbnail_url,
+                              dataState.list[index].fullInfo,
+                              dataState.list[index].thumbnailUrl,
                               dataState.list[index].blurb,
                             );
                           },
@@ -178,12 +178,12 @@ class _ListModelState extends State<ListModel> {
   }
 
   void navigateToDetailScreen(String title, String image, String info,
-      String thumbnail, String short_info) async {
+      String thumbnail, String shortInfo) async {
     await Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                ListTileScreen(title, image, info, thumbnail, short_info)));
+                ListTileScreen(title, image, info, thumbnail, shortInfo)));
   }
 
   date(int index) {

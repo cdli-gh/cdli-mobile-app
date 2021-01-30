@@ -17,13 +17,15 @@ class ListTileModel extends StatefulWidget {
   final image;
   final info;
   final thumbnail;
-  final short_info;
+  final shortInfo;
 
-  ListTileModel(this.title, this.image, this.info, this.thumbnail, this.short_info);
+  ListTileModel(
+      this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
   @override
   State<StatefulWidget> createState() {
-    return _ListTileModelState(this.title, this.image, this.info, this.thumbnail, this.short_info);
+    return _ListTileModelState(
+        this.title, this.image, this.info, this.thumbnail, this.shortInfo);
   }
 }
 
@@ -32,12 +34,13 @@ class _ListTileModelState extends State<ListTileModel> {
   String image;
   String info;
   String thumbnail;
-  String short_info;
+  String shortInfo;
 
-  _ListTileModelState(this.title, this.image, this.info, this.thumbnail, this.short_info);
+  _ListTileModelState(
+      this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
-  final cdliDataState dataState = new cdliDataState();
-  cdliData data;
+  final CDLIDataState dataState = new CDLIDataState();
+  CDLIData data;
 
   @override
   void initState() {
@@ -64,8 +67,13 @@ class _ListTileModelState extends State<ListTileModel> {
 
   void _showError() {
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text('Check your connection and try again.', style: TextStyle(fontFamily: 'NotoSansJP',
-        fontWeight: FontWeight.w400,),),
+      content: Text(
+        'Check your connection and try again.',
+        style: TextStyle(
+          fontFamily: 'NotoSansJP',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
       duration: Duration(seconds: 3),
       action: SnackBarAction(
         label: 'Retry',
@@ -97,8 +105,7 @@ class _ListTileModelState extends State<ListTileModel> {
                     blurRadius: 15.0,
                     color: Color.fromRGBO(18, 18, 18, 1),
                   ),
-                ]
-            ),
+                ]),
             //color: Colors.white,
             margin: const EdgeInsets.all(24.0),
             child: Padding(
@@ -109,20 +116,21 @@ class _ListTileModelState extends State<ListTileModel> {
                     flex: 1,
                     child: SingleChildScrollView(
                       child: Column(
-                        children: <Widget>[ Html(
-                          data: info,
-                          defaultTextStyle: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NotoSansJP',
-                              fontSize: 15),
-                          onLinkTap: (url) async {
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'Could not launch $url';
-                            }
-                          },
-                        ),
+                        children: <Widget>[
+                          Html(
+                            data: info,
+                            defaultTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'NotoSansJP',
+                                fontSize: 15),
+                            onLinkTap: (url) async {
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                          ),
                           ButtonTheme(
                             minWidth: 330.0,
                             height: 50.0,
@@ -131,13 +139,20 @@ class _ListTileModelState extends State<ListTileModel> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
-                              onPressed: (){
-                                share(thumbnail, short_info, title);
+                              onPressed: () {
+                                share(thumbnail, shortInfo, title);
                               },
-                              child: Text('Share', style: TextStyle(
-                                color: Colors.white, fontSize: 15, fontFamily: 'NotoSansJP',
-                                fontWeight: FontWeight.w400,), textAlign: TextAlign.center),
-                            ),),],
+                              child: Text('Share',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontFamily: 'NotoSansJP',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -161,10 +176,10 @@ class _ListTileModelState extends State<ListTileModel> {
                     children: <Widget>[
                       Center(
                           child: Icon(
-                            Icons.maximize,
-                            color: Colors.white,
-                            size: 25,
-                          ))
+                        Icons.maximize,
+                        color: Colors.white,
+                        size: 25,
+                      ))
                     ],
                   ),
                   Row(
@@ -190,29 +205,42 @@ class _ListTileModelState extends State<ListTileModel> {
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(
-                        android: (_) => MaterialProgressIndicatorData(),
-                        ios: (_) => CupertinoProgressIndicatorData(radius: 25),
-                      ))),
+                android: (_) => MaterialProgressIndicatorData(),
+                ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+              ))),
             ),
           ),
         );
-      },);
+      },
+    );
   }
 
-  void share(String thumbnail, String short_info, String title) async {
+  void share(String thumbnail, String shortInfo, String title) async {
     var request = await HttpClient().getUrl(Uri.parse(thumbnail));
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
     await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
-        text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n'
-            + '"' + title + ': ' + short_info + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+        text:
+            'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
+                '"' +
+                title +
+                ': ' +
+                shortInfo +
+                '"' +
+                "\n\n" +
+                'Information about the iPad and Android apps: ' +
+                'https://cdli.ucla.edu/?q=cdli-tablet' +
+                "\n");
   }
 
   void showSnackBar(BuildContext context) {
     Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text('Saved to collection', style: TextStyle(fontFamily: 'NotoSansJP',
-          fontWeight: FontWeight.w400,)),
+        content: Text('Saved to collection',
+            style: TextStyle(
+              fontFamily: 'NotoSansJP',
+              fontWeight: FontWeight.w400,
+            )),
         duration: const Duration(seconds: 2),
         action: SnackBarAction(
             label: "Undo",
