@@ -3,7 +3,6 @@ import 'package:cdli_tablet_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/list_model.dart';
 import 'package:cdli_tablet_app/routes/menu.dart';
-import 'package:flutter/services.dart';
 
 class ListScreen extends StatelessWidget with NavigationState {
   final Function onMenuTap;

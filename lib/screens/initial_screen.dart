@@ -5,7 +5,6 @@ import 'package:cdli_tablet_app/models/menu_dashboard_model.dart';
 import 'package:cdli_tablet_app/models/intro_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter/services.dart';
 
 class InitialScreen extends StatefulWidget {
   @override
