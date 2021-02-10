@@ -12,7 +12,7 @@ class RecentlyViewedModel extends StatefulWidget {
 }
 
 class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
-  final cdliDataState dataState = new cdliDataState();
+  final CdliDataState dataState = new CdliDataState();
 
   @override
   void initState() {
@@ -60,17 +60,15 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<List<cdliData>>(
+      child: FutureBuilder<List<CdliData>>(
         future: RecentlyViewedState.getLastViewedItems(dataState.list),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting ||
-              !snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
             return Container();
           }
-          List<cdliData> recentlyViewedItems = snapshot.data;
+          List<CdliData> recentlyViewedItems = snapshot.data;
           return ListView.builder(
-            itemBuilder: (ctx, index) =>
-                customListItem(recentlyViewedItems[index]),
+            itemBuilder: (ctx, index) => customListItem(recentlyViewedItems[index]),
             itemCount: recentlyViewedItems.length,
           );
         },
@@ -78,7 +76,7 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
     );
   }
 
-  Widget customListItem(cdliData item) {
+  Widget customListItem(CdliData item) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
@@ -87,7 +85,7 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             title: Text(
-              item.full_title,
+              item.fullTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'NotoSansJP',
@@ -120,15 +118,14 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
             ),
             subtitle: Text(
               date(item),
-              style: TextStyle(
-                  color: Colors.grey, fontFamily: 'NotoSansJP', fontSize: 14),
+              style: TextStyle(color: Colors.grey, fontFamily: 'NotoSansJP', fontSize: 14),
             ),
             onTap: () {
               navigateToDetailScreen(
-                item.full_title,
+                item.fullTitle,
                 item.url,
-                item.full_info,
-                item.thumbnail_url,
+                item.fullInfo,
+                item.thumbnailUrl,
                 item.blurb,
               );
             },
@@ -138,18 +135,16 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
     );
   }
 
-  void navigateToDetailScreen(String title, String image, String info,
-      String thumbnail, String short_info) async {
+  void navigateToDetailScreen(String title, String image, String info, String thumbnail, String shortInfo) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            ListTileScreen(title, image, info, thumbnail, short_info),
+        builder: (context) => ListTileScreen(title, image, info, thumbnail, shortInfo),
       ),
     );
   }
 
-  date(cdliData item) {
+  date(CdliData item) {
     String m;
 
     var day = DateTime.parse(item.date).day;

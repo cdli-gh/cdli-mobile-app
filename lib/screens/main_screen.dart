@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/main_model.dart';
 import 'package:cdli_tablet_app/screens/search_screen.dart';
 import 'package:cdli_tablet_app/routes/menu.dart';
-import 'package:flutter/services.dart';
 
 class MainScreen extends StatelessWidget with NavigationState {
   final Function onMenuTap;
@@ -16,6 +15,7 @@ class MainScreen extends StatelessWidget with NavigationState {
     return WillPopScope(
       onWillPop: () {
         _onBackPressed(context);
+        return;
       },
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -35,8 +35,7 @@ class MainScreen extends StatelessWidget with NavigationState {
               ),
               tooltip: 'Search',
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
               },
             ),
           ],

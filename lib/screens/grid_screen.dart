@@ -3,7 +3,6 @@ import 'package:cdli_tablet_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/grid_model.dart';
 import 'package:cdli_tablet_app/routes/menu.dart';
-import 'package:flutter/services.dart';
 
 class GridScreen extends StatelessWidget with NavigationState {
   final Function onMenuTap;
@@ -14,6 +13,7 @@ class GridScreen extends StatelessWidget with NavigationState {
     return WillPopScope(
       onWillPop: () {
         _onBackPressed(context);
+        return;
       },
       child: Scaffold(
         backgroundColor: Colors.black,

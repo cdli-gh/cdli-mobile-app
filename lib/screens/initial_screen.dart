@@ -5,26 +5,22 @@ import 'package:cdli_tablet_app/models/menu_dashboard_model.dart';
 import 'package:cdli_tablet_app/models/intro_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter/services.dart';
 
 class InitialScreen extends StatefulWidget {
   @override
   _InitialScreenState createState() => _InitialScreenState();
 }
 
-class _InitialScreenState extends State<InitialScreen>
-    with AfterLayoutMixin<InitialScreen> {
+class _InitialScreenState extends State<InitialScreen> with AfterLayoutMixin<InitialScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('Seen') ?? false);
 
     if (_seen) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => MenuDashboardModel()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuDashboardModel()));
     } else {
       await prefs.setBool('Seen', true);
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => IntroScreen()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => IntroScreen()));
     }
   }
 
@@ -45,6 +41,7 @@ class IntroScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () {
         _onBackPressed(context);
+        return;
       },
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -61,10 +58,7 @@ class IntroScreen extends StatelessWidget {
               ),
               tooltip: 'Close',
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MenuDashboardModel()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MenuDashboardModel()));
               },
             ),
           ],

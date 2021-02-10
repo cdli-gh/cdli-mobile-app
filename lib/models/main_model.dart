@@ -19,7 +19,7 @@ class MainModel extends StatefulWidget {
 }
 
 class _MainModelState extends State<MainModel> {
-  final cdliDataState dataState = new cdliDataState();
+  final CdliDataState dataState = new CdliDataState();
 
   @override
   void initState() {
@@ -66,29 +66,24 @@ class _MainModelState extends State<MainModel> {
 
   @override
   Widget build(BuildContext context) {
-    BorderRadiusGeometry radius = BorderRadius.only(
-        topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
+    BorderRadiusGeometry radius = BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
     return PageView.builder(
       itemCount: dataState.list.length,
       itemBuilder: (BuildContext context, int index) {
         return SlidingUpPanel(
-          onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
-              dataState.list[index].full_title),
+          onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(dataState.list[index].fullTitle),
           renderPanelSheet: false,
           backdropEnabled: true,
           parallaxEnabled: true,
           parallaxOffset: 0.35,
           borderRadius: radius,
           panel: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 15.0,
-                    color: Color.fromRGBO(18, 18, 18, 1),
-                  ),
-                ]),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16.0)), boxShadow: [
+              BoxShadow(
+                blurRadius: 15.0,
+                color: Color.fromRGBO(18, 18, 18, 1),
+              ),
+            ]),
             //color: Colors.white,
             margin: const EdgeInsets.all(24.0),
             child: Padding(
@@ -101,11 +96,8 @@ class _MainModelState extends State<MainModel> {
                       child: Column(
                         children: <Widget>[
                           Html(
-                            data: dataState.list[index].full_info,
-                            defaultTextStyle: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 15),
+                            data: dataState.list[index].fullInfo,
+                            defaultTextStyle: TextStyle(color: Colors.black, fontFamily: 'NotoSansJP', fontSize: 15),
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -172,7 +164,7 @@ class _MainModelState extends State<MainModel> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(dataState.list[index].full_title,
+                      Text(dataState.list[index].fullTitle,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15.5,
@@ -202,23 +194,11 @@ class _MainModelState extends State<MainModel> {
   }
 
   void share(int index) async {
-    var request = await HttpClient()
-        .getUrl(Uri.parse(dataState.list[index].thumbnail_url));
+    var request = await HttpClient().getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
-    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
-        text:
-            'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
-                '"' +
-                dataState.list[index].full_title +
-                ': ' +
-                dataState.list[index].blurb +
-                '"' +
-                "\n\n" +
-                'Information about the iPad and Android apps: ' +
-                'https://cdli.ucla.edu/?q=cdli-tablet' +
-                "\n");
+    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg', text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' + '"' + dataState.list[index].fullTitle + ': ' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
   }
 
   void showSnackBar(BuildContext context) {

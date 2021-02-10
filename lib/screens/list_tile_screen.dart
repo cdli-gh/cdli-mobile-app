@@ -9,15 +9,13 @@ class ListTileScreen extends StatefulWidget {
   final image;
   final info;
   final thumbnail;
-  final short_info;
+  final shortInfo;
 
-  ListTileScreen(
-      this.title, this.image, this.info, this.thumbnail, this.short_info);
+  ListTileScreen(this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
   @override
   State<StatefulWidget> createState() {
-    return _ListTileScreenState(
-        this.title, this.image, this.info, this.thumbnail, this.short_info);
+    return _ListTileScreenState(this.title, this.image, this.info, this.thumbnail, this.shortInfo);
   }
 }
 
@@ -26,10 +24,9 @@ class _ListTileScreenState extends State<ListTileScreen> {
   String image;
   String info;
   String thumbnail;
-  String short_info;
+  String shortInfo;
 
-  _ListTileScreenState(
-      this.title, this.image, this.info, this.thumbnail, this.short_info);
+  _ListTileScreenState(this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
   @override
   void initState() {
@@ -59,7 +56,7 @@ class _ListTileScreenState extends State<ListTileScreen> {
         ),
         //automaticallyImplyLeading: false,
       ),
-      body: ListTileModel(title, image, info, thumbnail, short_info),
+      body: ListTileModel(title, image, info, thumbnail, shortInfo),
     );
   }
 }
