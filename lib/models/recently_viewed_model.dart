@@ -12,7 +12,7 @@ class RecentlyViewedModel extends StatefulWidget {
 }
 
 class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
-  final cdliDataState dataState = new cdliDataState();
+  final CDLIDataState dataState = new CDLIDataState();
 
   @override
   void initState() {
@@ -60,14 +60,14 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<List<cdliData>>(
+      child: FutureBuilder<List<CDLIData>>(
         future: RecentlyViewedState.getLastViewedItems(dataState.list),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               !snapshot.hasData) {
             return Container();
           }
-          List<cdliData> recentlyViewedItems = snapshot.data;
+          List<CDLIData> recentlyViewedItems = snapshot.data;
           return ListView.builder(
             itemBuilder: (ctx, index) =>
                 customListItem(recentlyViewedItems[index]),
@@ -78,7 +78,7 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
     );
   }
 
-  Widget customListItem(cdliData item) {
+  Widget customListItem(CDLIData item) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
@@ -87,7 +87,7 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             title: Text(
-              item.full_title,
+              item.fullTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'NotoSansJP',
@@ -125,10 +125,10 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
             ),
             onTap: () {
               navigateToDetailScreen(
-                item.full_title,
+                item.fullTitle,
                 item.url,
-                item.full_info,
-                item.thumbnail_url,
+                item.fullInfo,
+                item.thumbnailUrl,
                 item.blurb,
               );
             },
@@ -139,17 +139,17 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
   }
 
   void navigateToDetailScreen(String title, String image, String info,
-      String thumbnail, String short_info) async {
+      String thumbnail, String shortInfo) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) =>
-            ListTileScreen(title, image, info, thumbnail, short_info),
+            ListTileScreen(title, image, info, thumbnail, shortInfo),
       ),
     );
   }
 
-  date(cdliData item) {
+  date(CDLIData item) {
     String m;
 
     var day = DateTime.parse(item.date).day;

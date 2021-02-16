@@ -3,7 +3,6 @@ import 'package:cdli_tablet_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/models/help_model.dart';
 import 'package:cdli_tablet_app/routes/menu.dart';
-import 'package:flutter/services.dart';
 
 class HelpScreen extends StatelessWidget with NavigationState {
   final Function onMenuTap;
@@ -12,9 +11,7 @@ class HelpScreen extends StatelessWidget with NavigationState {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        _onBackPressed(context);
-      },
+      onWillPop: () => _onBackPressed(context),
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(

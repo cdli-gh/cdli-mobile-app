@@ -19,7 +19,7 @@ class MainModel extends StatefulWidget {
 }
 
 class _MainModelState extends State<MainModel> {
-  final cdliDataState dataState = new cdliDataState();
+  final CDLIDataState dataState = new CDLIDataState();
 
   @override
   void initState() {
@@ -73,7 +73,7 @@ class _MainModelState extends State<MainModel> {
       itemBuilder: (BuildContext context, int index) {
         return SlidingUpPanel(
           onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
-              dataState.list[index].full_title),
+              dataState.list[index].fullTitle),
           renderPanelSheet: false,
           backdropEnabled: true,
           parallaxEnabled: true,
@@ -101,7 +101,7 @@ class _MainModelState extends State<MainModel> {
                       child: Column(
                         children: <Widget>[
                           Html(
-                            data: dataState.list[index].full_info,
+                            data: dataState.list[index].fullInfo,
                             defaultTextStyle: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'NotoSansJP',
@@ -172,7 +172,7 @@ class _MainModelState extends State<MainModel> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(dataState.list[index].full_title,
+                      Text(dataState.list[index].fullTitle,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15.5,
@@ -203,7 +203,7 @@ class _MainModelState extends State<MainModel> {
 
   void share(int index) async {
     var request = await HttpClient()
-        .getUrl(Uri.parse(dataState.list[index].thumbnail_url));
+        .getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
@@ -211,7 +211,7 @@ class _MainModelState extends State<MainModel> {
         text:
             'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
                 '"' +
-                dataState.list[index].full_title +
+                dataState.list[index].fullTitle +
                 ': ' +
                 dataState.list[index].blurb +
                 '"' +
