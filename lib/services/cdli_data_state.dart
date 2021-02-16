@@ -4,12 +4,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
-class CdliDataState {
-  List<CdliData> list;
+
+class CDLIDataState {
+  List<CDLIData> list;
   bool loading;
   bool error;
 
-  CdliDataState({
+  CDLIDataState({
     this.list = const [],
     this.loading = true,
     this.error = false,
@@ -31,6 +32,7 @@ class CdliDataState {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         this.list = CdliData.fromJsonArray(json);
+
         this.loading = false;
         this.error = false;
       }

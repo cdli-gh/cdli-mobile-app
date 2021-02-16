@@ -27,7 +27,9 @@ class _TileModelState extends State<TileModel> {
 
   _TileModelState(this.position);
 
+
   final CdliDataState dataState = new CdliDataState();
+
 
   @override
   void initState() {
@@ -77,12 +79,16 @@ class _TileModelState extends State<TileModel> {
           backdropEnabled: true,
           borderRadius: radius,
           panel: Container(
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16.0)), boxShadow: [
-              BoxShadow(
-                blurRadius: 15.0,
-                color: Color.fromRGBO(18, 18, 18, 1),
-              ),
-            ]),
+
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 15.0,
+                    color: Color.fromRGBO(18, 18, 18, 1),
+                  ),
+                ]),
             //color: Colors.white,
             margin: const EdgeInsets.all(24.0),
             child: Padding(
@@ -96,7 +102,12 @@ class _TileModelState extends State<TileModel> {
                         children: <Widget>[
                           Html(
                             data: dataState.list[position].fullInfo,
-                            defaultTextStyle: TextStyle(color: Colors.black, fontFamily: 'NotoSansJP', fontSize: 15),
+
+                            defaultTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'NotoSansJP',
+                                fontSize: 15),
+
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -190,11 +201,24 @@ class _TileModelState extends State<TileModel> {
   }
 
   void share(int index) async {
-    var request = await HttpClient().getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
+
+    var request = await HttpClient()
+        .getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
-    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg', text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' + '"' + dataState.list[index].fullTitle + ': ' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
+        text:
+            'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
+                '"' +
+                dataState.list[index].fullTitle +
+                ': ' +
+                dataState.list[index].blurb +
+                '"' +
+                "\n\n" +
+                'Information about the iPad and Android apps: ' +
+                'https://cdli.ucla.edu/?q=cdli-tablet' +
+                "\n");
   }
 
   void showSnackBar(BuildContext context) {

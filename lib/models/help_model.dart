@@ -94,8 +94,14 @@ class _HelpModelState extends State<HelpModel> {
                                 keyboardType: TextInputType.emailAddress,
                                 style: TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
-                                  disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0), borderSide: BorderSide(color: Colors.grey)),
-                                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0), borderSide: BorderSide(color: Colors.grey)),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.grey)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.grey)),
                                   labelText: 'Email address',
                                   labelStyle: TextStyle(
                                     color: Colors.grey,
@@ -107,12 +113,11 @@ class _HelpModelState extends State<HelpModel> {
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
                                 ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Email address is required.';
-                                  } else
-                                    return null;
-                                },
+
+                                validator: (value) =>
+                                    (value == null || value.isEmpty)
+                                        ? 'Email address is required.'
+                                        : null,
                                 onSaved: (value) => email = value,
                               ),
                               Padding(
@@ -122,8 +127,18 @@ class _HelpModelState extends State<HelpModel> {
                                   maxLines: null,
                                   style: TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
-                                    disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0), borderSide: BorderSide(color: Colors.grey)),
-                                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0), borderSide: BorderSide(color: Colors.grey)),
+
+                                    disabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                        borderSide:
+                                            BorderSide(color: Colors.grey)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                        borderSide:
+                                            BorderSide(color: Colors.grey)),
+
                                     labelText: 'Feedback',
                                     labelStyle: TextStyle(
                                       color: Colors.grey,
@@ -135,12 +150,11 @@ class _HelpModelState extends State<HelpModel> {
                                       borderRadius: BorderRadius.circular(16.0),
                                     ),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Feedback cannot be empty.';
-                                    } else
-                                      return null;
-                                  },
+
+                                  validator: (value) =>
+                                      (value == null || value.isEmpty)
+                                          ? 'Feedback cannot be empty.'
+                                          : null,
                                   onSaved: (value) => feedback = value,
                                 ),
                               ),
@@ -188,7 +202,9 @@ class _HelpModelState extends State<HelpModel> {
   void submitFeedback() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      DocumentReference ref = await db.collection('cdlitablet').add({'email': '$email', 'feedback': '$feedback'});
+      DocumentReference ref = await db
+          .collection('cdlitablet')
+          .add({'email': '$email', 'feedback': '$feedback'});
       setState(() => id = ref.documentID);
       print(ref.documentID);
       showAlertDialog();
@@ -216,6 +232,7 @@ class _HelpModelState extends State<HelpModel> {
               children: <Widget>[
                 Text(
                   'Your response has been recorded.',
+
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 15,
@@ -238,7 +255,10 @@ class _HelpModelState extends State<HelpModel> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MenuDashboardModel()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MenuDashboardModel()));
               },
             ),
           ],

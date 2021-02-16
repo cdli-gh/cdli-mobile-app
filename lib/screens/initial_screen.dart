@@ -43,6 +43,7 @@ class IntroScreen extends StatelessWidget {
         _onBackPressed(context);
         return;
       },
+
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(

@@ -10,6 +10,7 @@ class GridModel extends StatefulWidget {
 }
 
 class _GridModelState extends State<GridModel> {
+
   final CdliDataState dataState = new CdliDataState();
 
   @override
@@ -57,7 +58,6 @@ class _GridModelState extends State<GridModel> {
 
   @override
   Widget build(BuildContext context) {
-    //final orientation = MediaQuery.of(context).orientation;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
@@ -107,7 +107,9 @@ class _GridModelState extends State<GridModel> {
             Expanded(
               flex: 1,
               child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
                   itemCount: dataState.list.length,
                   itemBuilder: (BuildContext context, int index) {
                     int position = index;
@@ -138,7 +140,10 @@ class _GridModelState extends State<GridModel> {
                                 child: ListTile(
                                   leading: Text(
                                     date(index),
-                                    style: TextStyle(color: Colors.white, fontFamily: 'NotoSansJP', fontSize: 15),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'NotoSansJP',
+                                        fontSize: 15),
                                   ),
                                   onTap: () {
                                     navigateToDetailScreen(position);
@@ -156,7 +161,8 @@ class _GridModelState extends State<GridModel> {
   }
 
   void navigateToDetailScreen(int position) async {
-    await Navigator.push(context, MaterialPageRoute(builder: (context) => TileScreen(position)));
+    await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => TileScreen(position)));
   }
 
   date(int index) {

@@ -11,10 +11,12 @@ class GridScreen extends StatelessWidget with NavigationState {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+
       onWillPop: () {
         _onBackPressed(context);
         return;
       },
+
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(

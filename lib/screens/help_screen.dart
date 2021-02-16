@@ -15,6 +15,7 @@ class HelpScreen extends StatelessWidget with NavigationState {
         _onBackPressed(context);
         return;
       },
+
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(

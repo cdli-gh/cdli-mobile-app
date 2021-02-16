@@ -19,7 +19,9 @@ class MainModel extends StatefulWidget {
 }
 
 class _MainModelState extends State<MainModel> {
+
   final CdliDataState dataState = new CdliDataState();
+
 
   @override
   void initState() {
@@ -71,7 +73,9 @@ class _MainModelState extends State<MainModel> {
       itemCount: dataState.list.length,
       itemBuilder: (BuildContext context, int index) {
         return SlidingUpPanel(
-          onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(dataState.list[index].fullTitle),
+
+          onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
+              dataState.list[index].fullTitle),
           renderPanelSheet: false,
           backdropEnabled: true,
           parallaxEnabled: true,
@@ -97,7 +101,12 @@ class _MainModelState extends State<MainModel> {
                         children: <Widget>[
                           Html(
                             data: dataState.list[index].fullInfo,
-                            defaultTextStyle: TextStyle(color: Colors.black, fontFamily: 'NotoSansJP', fontSize: 15),
+
+                            defaultTextStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'NotoSansJP',
+                                fontSize: 15),
+
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -194,11 +203,24 @@ class _MainModelState extends State<MainModel> {
   }
 
   void share(int index) async {
-    var request = await HttpClient().getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
+
+    var request = await HttpClient()
+        .getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
-    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg', text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' + '"' + dataState.list[index].fullTitle + ': ' + dataState.list[index].blurb + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
+    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
+        text:
+            'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
+                '"' +
+                dataState.list[index].fullTitle +
+                ': ' +
+                dataState.list[index].blurb +
+                '"' +
+                "\n\n" +
+                'Information about the iPad and Android apps: ' +
+                'https://cdli.ucla.edu/?q=cdli-tablet' +
+                "\n");
   }
 
   void showSnackBar(BuildContext context) {

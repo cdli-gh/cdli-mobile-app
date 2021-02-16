@@ -74,8 +74,10 @@ class _HighlightsModelState extends State<HighlightsModel> {
   @override
   Widget build(BuildContext context) {
     var padding = MediaQuery.of(context).padding;
-    double height = MediaQuery.of(context).size.height - padding.top - padding.bottom;
+    double height =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom;
     return Container(
+
         child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
       CarouselSlider(
         height: height - 150,
@@ -122,5 +124,6 @@ class _HighlightsModelState extends State<HighlightsModel> {
             );
           })),
     ]));
+
   }
 }

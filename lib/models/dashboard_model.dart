@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'menu_dashboard_model.dart';
 
 class DashboardModel extends StatelessWidget {
   final bool isCollapsed;

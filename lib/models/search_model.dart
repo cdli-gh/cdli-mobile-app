@@ -10,8 +10,10 @@ class SearchModel extends StatefulWidget {
 }
 
 class _SearchModelState extends State<SearchModel> {
+
   final CdliDataState dataState = new CdliDataState();
   CdliDataState dataStateSearch = new CdliDataState();
+
 
   @override
   void initState() {
@@ -99,6 +101,7 @@ class _SearchModelState extends State<SearchModel> {
           title: Text(
             dataStateSearch.list[index].fullTitle,
             style: TextStyle(color: Colors.white, fontFamily: 'NotoSansJP', fontSize: 15),
+
           ),
           leading: ConstrainedBox(
             constraints: BoxConstraints(
@@ -124,6 +127,7 @@ class _SearchModelState extends State<SearchModel> {
           subtitle: Text(
             date(index),
             style: TextStyle(color: Colors.grey, fontFamily: 'NotoSansJP', fontSize: 14),
+
           ),
           onTap: () {
             navigateToDetailScreen(
@@ -139,8 +143,14 @@ class _SearchModelState extends State<SearchModel> {
     );
   }
 
-  void navigateToDetailScreen(String title, String image, String info, String thumbnail, String shortInfo) async {
-    await Navigator.push(context, MaterialPageRoute(builder: (context) => ListTileScreen(title, image, info, thumbnail, shortInfo)));
+
+  void navigateToDetailScreen(String title, String image, String info,
+      String thumbnail, String shortInfo) async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ListTileScreen(title, image, info, thumbnail, shortInfo)));
   }
 
   date(int index) {
