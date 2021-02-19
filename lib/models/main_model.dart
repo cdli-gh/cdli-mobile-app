@@ -20,6 +20,7 @@ class MainModel extends StatefulWidget {
 
 class _MainModelState extends State<MainModel> {
   final CDLIDataState dataState = new CDLIDataState();
+  bool api_response_received = false;
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _MainModelState extends State<MainModel> {
       if (dataState.error) {
         _showError();
       }
+      api_response_received = true;
     });
   }
 
@@ -68,137 +70,147 @@ class _MainModelState extends State<MainModel> {
   Widget build(BuildContext context) {
     BorderRadiusGeometry radius = BorderRadius.only(
         topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
-    return PageView.builder(
-      itemCount: dataState.list.length,
-      itemBuilder: (BuildContext context, int index) {
-        return SlidingUpPanel(
-          onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
-              dataState.list[index].fullTitle),
-          renderPanelSheet: false,
-          backdropEnabled: true,
-          parallaxEnabled: true,
-          parallaxOffset: 0.35,
-          borderRadius: radius,
-          panel: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 15.0,
-                    color: Color.fromRGBO(18, 18, 18, 1),
-                  ),
-                ]),
-            //color: Colors.white,
-            margin: const EdgeInsets.all(24.0),
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Html(
-                            data: dataState.list[index].fullInfo,
-                            defaultTextStyle: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 15),
-                            onLinkTap: (url) async {
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15.0),
-                            child: ButtonTheme(
-                              minWidth: 330.0,
-                              height: 50.0,
-                              child: RaisedButton(
-                                color: Color.fromRGBO(18, 18, 18, 1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                onPressed: () {
-                                  share(index);
-                                },
-                                child: Text('Share',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
+    return api_response_received
+        ? PageView.builder(
+            itemCount: dataState.list.length,
+            itemBuilder: (BuildContext context, int index) {
+              return SlidingUpPanel(
+                onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
+                    dataState.list[index].fullTitle),
+                renderPanelSheet: false,
+                backdropEnabled: true,
+                parallaxEnabled: true,
+                parallaxOffset: 0.35,
+                borderRadius: radius,
+                panel: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15.0,
+                          color: Color.fromRGBO(18, 18, 18, 1),
+                        ),
+                      ]),
+                  //color: Colors.white,
+                  margin: const EdgeInsets.all(24.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                Html(
+                                  data: dataState.list[index].fullInfo,
+                                  defaultTextStyle: TextStyle(
+                                      color: Colors.black,
                                       fontFamily: 'NotoSansJP',
-                                      fontWeight: FontWeight.w400,
+                                      fontSize: 15),
+                                  onLinkTap: (url) async {
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15.0),
+                                  child: ButtonTheme(
+                                    minWidth: 330.0,
+                                    height: 50.0,
+                                    child: RaisedButton(
+                                      color: Color.fromRGBO(18, 18, 18, 1),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      onPressed: () {
+                                        share(index);
+                                      },
+                                      child: Text('Share',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontFamily: 'NotoSansJP',
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          textAlign: TextAlign.center),
                                     ),
-                                    textAlign: TextAlign.center),
-                              ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          collapsed: Container(
-            margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(18, 18, 18, 1),
-              borderRadius: radius,
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Center(
-                          child: Icon(
-                        Icons.maximize,
-                        color: Colors.white,
-                        size: 25,
-                      ))
-                    ],
+                ),
+                collapsed: Container(
+                  margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(18, 18, 18, 1),
+                    borderRadius: radius,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(dataState.list[index].fullTitle,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.5,
-                            fontFamily: 'NotoSansJP',
-                            fontWeight: FontWeight.w400,
-                          ))
-                    ],
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Center(
+                                child: Icon(
+                              Icons.maximize,
+                              color: Colors.white,
+                              size: 25,
+                            ))
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(dataState.list[index].fullTitle,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15.5,
+                                  fontFamily: 'NotoSansJP',
+                                  fontWeight: FontWeight.w400,
+                                ))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          body: Center(
-            child: PhotoView(
-              imageProvider: CacheImage(dataState.list[index].url),
-              loadingBuilder: (context, progress) => Center(
-                  child: Container(
-                      child: PlatformCircularProgressIndicator(
+                ),
+                body: Center(
+                  child: PhotoView(
+                    imageProvider: CacheImage(dataState.list[index].url),
+                    loadingBuilder: (context, progress) => Center(
+                        child: Container(
+                            child: PlatformCircularProgressIndicator(
+                      android: (_) => MaterialProgressIndicatorData(),
+                      ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+                    ))),
+                  ),
+                ),
+              );
+            },
+          )
+        : Center(
+            child: Container(
+              child: PlatformCircularProgressIndicator(
                 android: (_) => MaterialProgressIndicatorData(),
                 ios: (_) => CupertinoProgressIndicatorData(radius: 25),
-              ))),
+              ),
             ),
-          ),
-        );
-      },
-    );
+          );
   }
 
   void share(int index) async {
