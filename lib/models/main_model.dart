@@ -40,14 +40,14 @@ class _MainModelState extends State<MainModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -234,7 +234,8 @@ class _MainModelState extends State<MainModel> {
   }
 
   void showSnackBar(BuildContext context) {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text('Saved to collection.',
             style: TextStyle(
               fontFamily: 'NotoSansJP',
@@ -242,10 +243,13 @@ class _MainModelState extends State<MainModel> {
             )),
         duration: const Duration(seconds: 3),
         action: SnackBarAction(
-            label: "Undo",
-            textColor: Colors.cyan,
-            onPressed: () {
-              // Undo change
-            })));
+          label: "Undo",
+          textColor: Colors.cyan,
+          onPressed: () {
+            // Undo change
+          },
+        ),
+      ),
+    );
   }
 }
