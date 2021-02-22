@@ -11,6 +11,7 @@ class GridModel extends StatefulWidget {
 
 class _GridModelState extends State<GridModel> {
   final CDLIDataState dataState = new CDLIDataState();
+  bool api_response_received = false;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _GridModelState extends State<GridModel> {
       if (dataState.error) {
         _showError();
       }
+      api_response_received = true;
     });
   }
 
@@ -57,7 +59,7 @@ class _GridModelState extends State<GridModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return api_response_received?Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
         child: Column(
@@ -157,6 +159,13 @@ class _GridModelState extends State<GridModel> {
                   }),
             ),
           ],
+        ),
+      ),
+    ):Center(
+      child: Container(
+        child: PlatformCircularProgressIndicator(
+          android: (_) => MaterialProgressIndicatorData(),
+          ios: (_) => CupertinoProgressIndicatorData(radius: 25),
         ),
       ),
     );
