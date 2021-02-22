@@ -31,14 +31,14 @@ class _GridModelState extends State<GridModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(

@@ -30,14 +30,14 @@ class _ListModelState extends State<ListModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(new SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
       content: new Text(
         'Check your connection and try again.',
         style: TextStyle(
