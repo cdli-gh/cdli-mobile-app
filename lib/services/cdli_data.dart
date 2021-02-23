@@ -13,7 +13,7 @@ class CdliData {
   final String fullInfo;
 
 
-  CDLIData(
+  CdliData(
       {this.date,
       this.thumbnailUrl,
       this.url,
@@ -23,12 +23,12 @@ class CdliData {
       this.fullTitle,
       this.fullInfo});
 
-  static List<CDLIData> fromJsonArray(String covariant) {
+  static List<CdliData> fromJsonArray(String covariant) {
     List data = json.decode(covariant);
-    List<CDLIData> result = [];
+    List<CdliData> result = [];
 
     for (var i = 0; i < data.length; i++) {
-      result.add(new CDLIData(
+      result.add(new CdliData(
           date: data[i]['date'],
           thumbnailUrl: data[i]['thumbnail-url'],
           url: data[i]['url'],

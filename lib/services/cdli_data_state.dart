@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 
 
 class CDLIDataState {
-  List<CDLIData> list;
+  List<CdliData> list;
   bool loading;
   bool error;
 
