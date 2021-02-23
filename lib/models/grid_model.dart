@@ -11,7 +11,7 @@ class GridModel extends StatefulWidget {
 
 class _GridModelState extends State<GridModel> {
   final CDLIDataState dataState = new CDLIDataState();
-  bool api_response_received = false;
+  bool apiResponseReceived = false;
 
   @override
   void initState() {
@@ -26,19 +26,19 @@ class _GridModelState extends State<GridModel> {
       if (dataState.error) {
         _showError();
       }
-      api_response_received = true;
+      apiResponseReceived = true;
     });
   }
 
   void _retry() {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -59,7 +59,7 @@ class _GridModelState extends State<GridModel> {
 
   @override
   Widget build(BuildContext context) {
-    return api_response_received?Padding(
+    return apiResponseReceived?Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
         child: Column(

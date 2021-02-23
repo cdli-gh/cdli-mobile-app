@@ -11,7 +11,7 @@ class ListModel extends StatefulWidget {
 
 class _ListModelState extends State<ListModel> {
   final CDLIDataState dataState = new CDLIDataState();
-  bool api_response_received = false;
+  bool apiResponseReceived = false;
   @override
   void initState() {
     super.initState();
@@ -25,19 +25,19 @@ class _ListModelState extends State<ListModel> {
       if (dataState.error) {
         _showError();
       }
-      api_response_received=true;
+      apiResponseReceived=true;
     });
   }
 
   void _retry() {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+    Scaffold.of(context).showSnackBar(new SnackBar(
       content: new Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -58,7 +58,7 @@ class _ListModelState extends State<ListModel> {
 
   @override
   Widget build(BuildContext context) {
-    return api_response_received?Padding(
+    return apiResponseReceived?Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
         child: Column(

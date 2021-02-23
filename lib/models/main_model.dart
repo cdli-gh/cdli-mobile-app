@@ -20,7 +20,7 @@ class MainModel extends StatefulWidget {
 
 class _MainModelState extends State<MainModel> {
   final CDLIDataState dataState = new CDLIDataState();
-  bool api_response_received = false;
+  bool apiResponseReceived = false;
 
   @override
   void initState() {
@@ -35,19 +35,19 @@ class _MainModelState extends State<MainModel> {
       if (dataState.error) {
         _showError();
       }
-      api_response_received = true;
+      apiResponseReceived = true;
     });
   }
 
   void _retry() {
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -70,7 +70,7 @@ class _MainModelState extends State<MainModel> {
   Widget build(BuildContext context) {
     BorderRadiusGeometry radius = BorderRadius.only(
         topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
-    return api_response_received
+    return apiResponseReceived
         ? PageView.builder(
             itemCount: dataState.list.length,
             itemBuilder: (BuildContext context, int index) {
@@ -234,7 +234,7 @@ class _MainModelState extends State<MainModel> {
   }
 
   void showSnackBar(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
+    Scaffold.of(context).showSnackBar(
       SnackBar(
         content: Text('Saved to collection.',
             style: TextStyle(
