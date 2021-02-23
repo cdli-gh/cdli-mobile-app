@@ -11,7 +11,7 @@ class ListModel extends StatefulWidget {
 
 class _ListModelState extends State<ListModel> {
   final CDLIDataState dataState = new CDLIDataState();
-
+  bool apiResponseReceived = false;
   @override
   void initState() {
     super.initState();
@@ -25,6 +25,7 @@ class _ListModelState extends State<ListModel> {
       if (dataState.error) {
         _showError();
       }
+      apiResponseReceived=true;
     });
   }
 
@@ -57,7 +58,7 @@ class _ListModelState extends State<ListModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return apiResponseReceived?Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
         child: Column(
@@ -172,6 +173,13 @@ class _ListModelState extends State<ListModel> {
               ),
             ),
           ],
+        ),
+      ),
+    ):Center(
+      child: Container(
+        child: PlatformCircularProgressIndicator(
+          android: (_) => MaterialProgressIndicatorData(),
+          ios: (_) => CupertinoProgressIndicatorData(radius: 25),
         ),
       ),
     );
