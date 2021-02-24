@@ -4,13 +4,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
-
-class CDLIDataState {
+class CdliDataState {
   List<CdliData> list;
   bool loading;
   bool error;
 
-  CDLIDataState({
+  CdliDataState({
     this.list = const [],
     this.loading = true,
     this.error = false,
