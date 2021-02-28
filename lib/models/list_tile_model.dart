@@ -19,13 +19,11 @@ class ListTileModel extends StatefulWidget {
   final thumbnail;
   final shortInfo;
 
-  ListTileModel(
-      this.title, this.image, this.info, this.thumbnail, this.shortInfo);
+  ListTileModel(this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
   @override
   State<StatefulWidget> createState() {
-    return _ListTileModelState(
-        this.title, this.image, this.info, this.thumbnail, this.shortInfo);
+    return _ListTileModelState(this.title, this.image, this.info, this.thumbnail, this.shortInfo);
   }
 }
 
@@ -36,11 +34,10 @@ class _ListTileModelState extends State<ListTileModel> {
   String thumbnail;
   String shortInfo;
 
-  _ListTileModelState(
-      this.title, this.image, this.info, this.thumbnail, this.shortInfo);
+  _ListTileModelState(this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
-  final CDLIDataState dataState = new CDLIDataState();
-  CDLIData data;
+  final CdliDataState dataState = new CdliDataState();
+  CdliData data;
 
   @override
   void initState() {
@@ -87,8 +84,7 @@ class _ListTileModelState extends State<ListTileModel> {
 
   @override
   Widget build(BuildContext context) {
-    BorderRadiusGeometry radius = BorderRadius.only(
-        topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
+    BorderRadiusGeometry radius = BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
     return PageView.builder(
       itemCount: dataState.list.length.compareTo(0),
       itemBuilder: (BuildContext context, int index) {
@@ -97,15 +93,12 @@ class _ListTileModelState extends State<ListTileModel> {
           backdropEnabled: true,
           borderRadius: radius,
           panel: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 15.0,
-                    color: Color.fromRGBO(18, 18, 18, 1),
-                  ),
-                ]),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16.0)), boxShadow: [
+              BoxShadow(
+                blurRadius: 15.0,
+                color: Color.fromRGBO(18, 18, 18, 1),
+              ),
+            ]),
             //color: Colors.white,
             margin: const EdgeInsets.all(24.0),
             child: Padding(
@@ -119,10 +112,7 @@ class _ListTileModelState extends State<ListTileModel> {
                         children: <Widget>[
                           Html(
                             data: info,
-                            defaultTextStyle: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 15),
+                            defaultTextStyle: TextStyle(color: Colors.black, fontFamily: 'NotoSansJP', fontSize: 15),
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -220,18 +210,8 @@ class _ListTileModelState extends State<ListTileModel> {
     var response = await request.close();
 
     Uint8List bytes = await consolidateHttpClientResponseBytes(response);
-    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg',
-        text:
-            'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' +
-                '"' +
-                title +
-                ': ' +
-                shortInfo +
-                '"' +
-                "\n\n" +
-                'Information about the iPad and Android apps: ' +
-                'https://cdli.ucla.edu/?q=cdli-tablet' +
-                "\n");
+
+    await Share.file('cdli tablet', 'image.jpg', bytes, 'image/jpg', text: 'I saw this entry on the app "cdli tablet" and wanted to share it with you: \n\n' + '"' + title + ': ' + shortInfo + '"' + "\n\n" + 'Information about the iPad and Android apps: ' + 'https://cdli.ucla.edu/?q=cdli-tablet' + "\n");
   }
 
   void showSnackBar(BuildContext context) {

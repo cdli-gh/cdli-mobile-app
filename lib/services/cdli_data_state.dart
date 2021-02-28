@@ -4,12 +4,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
-class CDLIDataState {
-  List<CDLIData> list;
+class CdliDataState {
+  List<CdliData> list;
   bool loading;
   bool error;
 
-  CDLIDataState({
+  CdliDataState({
     this.list = const [],
     this.loading = true,
     this.error = false,
@@ -25,13 +25,13 @@ class CDLIDataState {
     try {
       debugPrint('trying');
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(
-          Uri.parse('https://cdli.ucla.edu/cdlitablet_android/fetchdata'));
+      var request = await httpClient.getUrl(Uri.parse('https://cdli.ucla.edu/cdlitablet_android/fetchdata'));
       var response = await request.close();
 
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
-        this.list = CDLIData.fromJsonArray(json);
+        this.list = CdliData.fromJsonArray(json);
+
         this.loading = false;
         this.error = false;
       }

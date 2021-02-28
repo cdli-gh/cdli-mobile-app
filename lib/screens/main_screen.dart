@@ -13,7 +13,11 @@ class MainScreen extends StatelessWidget with NavigationState {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _onBackPressed(context),
+      onWillPop: () {
+        _onBackPressed(context);
+        return;
+      },
+
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -32,8 +36,7 @@ class MainScreen extends StatelessWidget with NavigationState {
               ),
               tooltip: 'Search',
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
               },
             ),
           ],

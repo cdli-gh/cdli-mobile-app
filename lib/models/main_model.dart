@@ -19,7 +19,9 @@ class MainModel extends StatefulWidget {
 }
 
 class _MainModelState extends State<MainModel> {
-  final CDLIDataState dataState = new CDLIDataState();
+
+  final CdliDataState dataState = new CdliDataState();
+
 
   @override
   void initState() {
@@ -66,12 +68,12 @@ class _MainModelState extends State<MainModel> {
 
   @override
   Widget build(BuildContext context) {
-    BorderRadiusGeometry radius = BorderRadius.only(
-        topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
+    BorderRadiusGeometry radius = BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
     return PageView.builder(
       itemCount: dataState.list.length,
       itemBuilder: (BuildContext context, int index) {
         return SlidingUpPanel(
+
           onPanelOpened: () => RecentlyViewedState.addItemToViewHistory(
               dataState.list[index].fullTitle),
           renderPanelSheet: false,
@@ -80,15 +82,12 @@ class _MainModelState extends State<MainModel> {
           parallaxOffset: 0.35,
           borderRadius: radius,
           panel: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 15.0,
-                    color: Color.fromRGBO(18, 18, 18, 1),
-                  ),
-                ]),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16.0)), boxShadow: [
+              BoxShadow(
+                blurRadius: 15.0,
+                color: Color.fromRGBO(18, 18, 18, 1),
+              ),
+            ]),
             //color: Colors.white,
             margin: const EdgeInsets.all(24.0),
             child: Padding(
@@ -102,10 +101,12 @@ class _MainModelState extends State<MainModel> {
                         children: <Widget>[
                           Html(
                             data: dataState.list[index].fullInfo,
+
                             defaultTextStyle: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'NotoSansJP',
                                 fontSize: 15),
+
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -202,6 +203,7 @@ class _MainModelState extends State<MainModel> {
   }
 
   void share(int index) async {
+
     var request = await HttpClient()
         .getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
     var response = await request.close();

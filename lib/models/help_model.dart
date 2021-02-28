@@ -19,8 +19,7 @@ class _HelpModelState extends State<HelpModel> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-            Widget>[
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: Row(
@@ -114,6 +113,7 @@ class _HelpModelState extends State<HelpModel> {
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
                                 ),
+
                                 validator: (value) =>
                                     (value == null || value.isEmpty)
                                         ? 'Email address is required.'
@@ -127,6 +127,7 @@ class _HelpModelState extends State<HelpModel> {
                                   maxLines: null,
                                   style: TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
+
                                     disabledBorder: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(16.0),
@@ -137,6 +138,7 @@ class _HelpModelState extends State<HelpModel> {
                                             BorderRadius.circular(16.0),
                                         borderSide:
                                             BorderSide(color: Colors.grey)),
+
                                     labelText: 'Feedback',
                                     labelStyle: TextStyle(
                                       color: Colors.grey,
@@ -148,6 +150,7 @@ class _HelpModelState extends State<HelpModel> {
                                       borderRadius: BorderRadius.circular(16.0),
                                     ),
                                   ),
+
                                   validator: (value) =>
                                       (value == null || value.isEmpty)
                                           ? 'Feedback cannot be empty.'
@@ -228,7 +231,8 @@ class _HelpModelState extends State<HelpModel> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                  'Your respose has been recorded.',
+                  'Your response has been recorded.',
+
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 15,

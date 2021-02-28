@@ -11,19 +11,16 @@ class InitialScreen extends StatefulWidget {
   _InitialScreenState createState() => _InitialScreenState();
 }
 
-class _InitialScreenState extends State<InitialScreen>
-    with AfterLayoutMixin<InitialScreen> {
+class _InitialScreenState extends State<InitialScreen> with AfterLayoutMixin<InitialScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('Seen') ?? false);
 
     if (_seen) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => MenuDashboardModel()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MenuDashboardModel()));
     } else {
       await prefs.setBool('Seen', true);
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => IntroScreen()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => IntroScreen()));
     }
   }
 
@@ -42,7 +39,11 @@ class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => _onBackPressed(context),
+      onWillPop: () {
+        _onBackPressed(context);
+        return;
+      },
+
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -58,10 +59,7 @@ class IntroScreen extends StatelessWidget {
               ),
               tooltip: 'Close',
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MenuDashboardModel()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MenuDashboardModel()));
               },
             ),
           ],

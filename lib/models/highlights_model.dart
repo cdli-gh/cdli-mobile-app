@@ -9,7 +9,7 @@ class HighlightsModel extends StatefulWidget {
 }
 
 class _HighlightsModelState extends State<HighlightsModel> {
-  static CDLIDataState dataState = new CDLIDataState();
+  static CdliDataState dataState = new CdliDataState();
 
   @override
   void initState() {
@@ -77,56 +77,53 @@ class _HighlightsModelState extends State<HighlightsModel> {
     double height =
         MediaQuery.of(context).size.height - padding.top - padding.bottom;
     return Container(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-          CarouselSlider(
-            height: height - 150,
-            initialPage: 0,
-            // enlargeCenterPage: true,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 2000),
-            pauseAutoPlayOnTouch: Duration(seconds: 10),
-            onPageChanged: (index) {
-              setState(() {
-                _current = index;
-              });
-            },
-            items: highlights.map((imgAsset) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                    ),
-                    child: Image.asset(
-                      imgAsset, fit: BoxFit.fitWidth,
-                      //loadingBuilder: progressIndicator(),
-                    ),
-                  );
-                },
+
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+      CarouselSlider(
+        height: height - 150,
+        initialPage: 0,
+        // enlargeCenterPage: true,
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 5),
+        autoPlayAnimationDuration: Duration(milliseconds: 2000),
+        pauseAutoPlayOnTouch: Duration(seconds: 10),
+        onPageChanged: (index) {
+          setState(() {
+            _current = index;
+          });
+        },
+        items: highlights.map((imgAsset) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 10.0),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                ),
+                child: Image.asset(
+                  imgAsset, fit: BoxFit.fitWidth,
+                  //loadingBuilder: progressIndicator(),
+                ),
               );
-            }).toList(),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: map<Widget>(highlights, (index, asset) {
-                return Container(
-                  width: 7.0,
-                  height: 7.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 3.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _current == index ? Colors.white : Colors.grey),
-                );
-              })),
-        ]));
+            },
+          );
+        }).toList(),
+      ),
+      SizedBox(
+        height: 30,
+      ),
+      Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: map<Widget>(highlights, (index, asset) {
+            return Container(
+              width: 7.0,
+              height: 7.0,
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 3.0),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: _current == index ? Colors.white : Colors.grey),
+            );
+          })),
+    ]));
+
   }
 }

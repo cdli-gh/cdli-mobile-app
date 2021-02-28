@@ -27,7 +27,9 @@ class _TileModelState extends State<TileModel> {
 
   _TileModelState(this.position);
 
-  final CDLIDataState dataState = new CDLIDataState();
+
+  final CdliDataState dataState = new CdliDataState();
+
 
   @override
   void initState() {
@@ -68,8 +70,7 @@ class _TileModelState extends State<TileModel> {
 
   @override
   Widget build(BuildContext context) {
-    BorderRadiusGeometry radius = BorderRadius.only(
-        topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
+    BorderRadiusGeometry radius = BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0));
     return PageView.builder(
       itemCount: dataState.list.length.compareTo(0),
       itemBuilder: (BuildContext context, int index) {
@@ -78,6 +79,7 @@ class _TileModelState extends State<TileModel> {
           backdropEnabled: true,
           borderRadius: radius,
           panel: Container(
+
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(16.0)),
@@ -100,10 +102,12 @@ class _TileModelState extends State<TileModel> {
                         children: <Widget>[
                           Html(
                             data: dataState.list[position].fullInfo,
+
                             defaultTextStyle: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'NotoSansJP',
                                 fontSize: 15),
+
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -197,6 +201,7 @@ class _TileModelState extends State<TileModel> {
   }
 
   void share(int index) async {
+
     var request = await HttpClient()
         .getUrl(Uri.parse(dataState.list[index].thumbnailUrl));
     var response = await request.close();

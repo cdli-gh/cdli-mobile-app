@@ -10,7 +10,8 @@ class GridModel extends StatefulWidget {
 }
 
 class _GridModelState extends State<GridModel> {
-  final CDLIDataState dataState = new CDLIDataState();
+
+  final CdliDataState dataState = new CdliDataState();
 
   @override
   void initState() {
@@ -106,6 +107,7 @@ class _GridModelState extends State<GridModel> {
             Expanded(
               flex: 1,
               child: GridView.builder(
+
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemCount: dataState.list.length,
@@ -123,13 +125,9 @@ class _GridModelState extends State<GridModel> {
                                   return progress == null
                                       ? child
                                       : Center(
-                                          child:
-                                              PlatformCircularProgressIndicator(
-                                          android: (_) =>
-                                              MaterialProgressIndicatorData(),
-                                          ios: (_) =>
-                                              CupertinoProgressIndicatorData(
-                                                  radius: 25),
+                                          child: PlatformCircularProgressIndicator(
+                                          android: (_) => MaterialProgressIndicatorData(),
+                                          ios: (_) => CupertinoProgressIndicatorData(radius: 25),
                                         ));
                                 },
                               ),

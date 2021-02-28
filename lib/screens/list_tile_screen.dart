@@ -11,6 +11,7 @@ class ListTileScreen extends StatefulWidget {
   final thumbnail;
   final shortInfo;
 
+
   ListTileScreen(
       this.title, this.image, this.info, this.thumbnail, this.shortInfo);
 
@@ -29,7 +30,7 @@ class _ListTileScreenState extends State<ListTileScreen> {
   String shortInfo;
 
   _ListTileScreenState(
-      this.title, this.image, this.info, this.thumbnail, this.shortInfo);
+      this.title, this.image, this.info, this.thumbnail, this.shortInfo,);
 
   @override
   void initState() {

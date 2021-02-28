@@ -10,7 +10,7 @@ class ListModel extends StatefulWidget {
 }
 
 class _ListModelState extends State<ListModel> {
-  final CDLIDataState dataState = new CDLIDataState();
+  final CdliDataState dataState = new CdliDataState();
 
   @override
   void initState() {
@@ -118,10 +118,7 @@ class _ListModelState extends State<ListModel> {
                         child: ListTile(
                           title: Text(
                             dataState.list[index].fullTitle,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 15),
+                            style: TextStyle(color: Colors.white, fontFamily: 'NotoSansJP', fontSize: 15),
                           ),
                           leading: ConstrainedBox(
                             constraints: BoxConstraints(
@@ -137,23 +134,16 @@ class _ListModelState extends State<ListModel> {
                                 return progress == null
                                     ? child
                                     : new Center(
-                                        child:
-                                            PlatformCircularProgressIndicator(
-                                        android: (_) =>
-                                            MaterialProgressIndicatorData(),
-                                        ios: (_) =>
-                                            CupertinoProgressIndicatorData(
-                                                radius: 25),
+                                        child: PlatformCircularProgressIndicator(
+                                        android: (_) => MaterialProgressIndicatorData(),
+                                        ios: (_) => CupertinoProgressIndicatorData(radius: 25),
                                       ));
                               },
                             ),
                           ),
                           subtitle: Text(
                             date(index),
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 14),
+                            style: TextStyle(color: Colors.grey, fontFamily: 'NotoSansJP', fontSize: 14),
                           ),
                           onTap: () {
                             navigateToDetailScreen(
@@ -177,13 +167,8 @@ class _ListModelState extends State<ListModel> {
     );
   }
 
-  void navigateToDetailScreen(String title, String image, String info,
-      String thumbnail, String shortInfo) async {
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                ListTileScreen(title, image, info, thumbnail, shortInfo)));
+  void navigateToDetailScreen(String title, String image, String info, String thumbnail, String shortInfo) async {
+    await Navigator.push(context, MaterialPageRoute(builder: (context) => ListTileScreen(title, image, info, thumbnail, shortInfo)));
   }
 
   date(int index) {
