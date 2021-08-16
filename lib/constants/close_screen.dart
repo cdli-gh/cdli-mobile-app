@@ -30,7 +30,7 @@ Widget closeApp(BuildContext context) {
       ),
     ),
     actions: <Widget>[
-      FlatButton(
+      TextButton(
         child: Text(
           'Yes',
           style: TextStyle(
@@ -44,7 +44,7 @@ Widget closeApp(BuildContext context) {
           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         },
       ),
-      FlatButton(
+      TextButton(
         child: Text(
           'No',
           style: TextStyle(

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
+import 'package:flutter_html/style.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,7 +10,6 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:cache_image/cache_image.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class TileModel extends StatefulWidget {
@@ -46,14 +47,14 @@ class _TileModelState extends State<TileModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Check your connection and try again.'),
       duration: Duration(seconds: 3),
       action: SnackBarAction(
@@ -100,10 +101,12 @@ class _TileModelState extends State<TileModel> {
                         children: <Widget>[
                           Html(
                             data: dataState.list[position].fullInfo,
-                            defaultTextStyle: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 15),
+                            style: {
+                              "body": Style(
+                                  color: Colors.black,
+                                  fontFamily: 'NotoSansJP',
+                                  fontSize: FontSize(15))
+                            },
                             onLinkTap: (url) async {
                               if (await canLaunch(url)) {
                                 await launch(url);
@@ -115,10 +118,12 @@ class _TileModelState extends State<TileModel> {
                           ButtonTheme(
                             minWidth: 330.0,
                             height: 50.0,
-                            child: RaisedButton(
-                              color: Color.fromRGBO(18, 18, 18, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromRGBO(18, 18, 18, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
                               ),
                               onPressed: () {
                                 share(position);
@@ -182,12 +187,15 @@ class _TileModelState extends State<TileModel> {
           ),
           body: Center(
             child: PhotoView(
-              imageProvider: CacheImage(dataState.list[position].url),
+              imageProvider: CachedNetworkImage(
+                imageUrl: dataState.list[position].url,
+              ) as ImageProvider,
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(
-                android: (_) => MaterialProgressIndicatorData(),
-                ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+                material: (_, __) => MaterialProgressIndicatorData(),
+                cupertino: (_, __) =>
+                    CupertinoProgressIndicatorData(radius: 25),
               ))),
             ),
           ),
@@ -217,7 +225,7 @@ class _TileModelState extends State<TileModel> {
   }
 
   void showSnackBar(BuildContext context) {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
           'Saved to collection',
           style: TextStyle(

@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
 import 'package:cdli_tablet_app/screens/list_tile_screen.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:cache_image/cache_image.dart';
 
 class SearchModel extends StatefulWidget {
   @override
@@ -23,6 +23,8 @@ class _SearchModelState extends State<SearchModel> {
   getDataFromApi() async {
     if (!mounted) return;
     await dataState.getDataFromAPI();
+    print('dataState is ');
+    print(dataState.list);
     setState(() {
       if (dataState.error) {
         _showError();
@@ -31,14 +33,14 @@ class _SearchModelState extends State<SearchModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(new SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
       content: new Text('Check your connection and try again.'),
       duration: new Duration(seconds: 3),
       action: new SnackBarAction(
@@ -109,15 +111,18 @@ class _SearchModelState extends State<SearchModel> {
               maxWidth: 75,
             ),
             child: Image(
-              image: CacheImage(dataStateSearch.list[index].url),
+              image: CachedNetworkImage(
+                imageUrl: dataState.list[index].url,
+              ) as ImageProvider,
               fit: BoxFit.fitWidth,
               loadingBuilder: (context, child, progress) {
                 return progress == null
                     ? child
                     : new Center(
                         child: PlatformCircularProgressIndicator(
-                        android: (_) => MaterialProgressIndicatorData(),
-                        ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+                        material: (_, __) => MaterialProgressIndicatorData(),
+                        cupertino: (_, __) =>
+                            CupertinoProgressIndicatorData(radius: 25),
                       ));
               },
             ),

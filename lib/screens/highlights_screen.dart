@@ -18,12 +18,12 @@ class _HighlightsScreenState extends State<HighlightsScreen> {
         title: kAppBarTitle,
         backgroundColor: Colors.black,
         leading: PlatformIconButton(
-          android: (_) => MaterialIconButtonData(
+          material: (_, __) => MaterialIconButtonData(
               icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
           )),
-          ios: (_) => CupertinoIconButtonData(
+          cupertino: (_, __) => CupertinoIconButtonData(
               icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
