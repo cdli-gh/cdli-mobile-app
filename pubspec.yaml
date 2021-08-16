@@ -31,15 +31,16 @@ dependencies:
   intl: ^0.17.0
   esys_flutter_share: ^1.0.2
   flutter_platform_widgets: ^1.9.5
-  shared_preferences: ^2.0.6
+  shared_preferences:
   after_layout: ^1.1.0
   carousel_slider: ^4.0.0
   sliding_up_panel: ^2.0.0+1
-  cloud_firestore: ^1.0.5
+  cloud_firestore:
   flutter_bloc: ^7.1.0
-  firebase_core:
-  firebase_storage:
+  firebase_core: ^0.7.0
+  firebase_storage: ^7.0.0
   cached_network_image:
+  
 
 dev_dependencies:
   flutter_test:

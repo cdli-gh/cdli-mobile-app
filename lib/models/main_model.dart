@@ -4,10 +4,9 @@ import 'package:cdli_tablet_app/services/recently_viewed_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
-import 'package:flutter_html/style.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:flutter_html/flutter_html.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -101,22 +100,22 @@ class _MainModelState extends State<MainModel> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Html(
-                            data: dataState.list[index].fullInfo,
-                            style: {
-                              "body": Style(
-                                  color: Colors.black,
-                                  fontFamily: 'NotoSansJP',
-                                  fontSize: FontSize(15)),
-                            },
-                            onLinkTap: (url) async {
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
+                          // Html(
+                          //   data: dataState.list[index].fullInfo,
+                          //   style: {
+                          //     "body": Style(
+                          //         color: Colors.black,
+                          //         fontFamily: 'NotoSansJP',
+                          //         fontSize: FontSize(15)),
+                          //   },
+                          //   onLinkTap: (url) async {
+                          //     if (await canLaunch(url)) {
+                          //       await launch(url);
+                          //     } else {
+                          //       throw 'Could not launch $url';
+                          //     }
+                          //   },
+                          // ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15.0),
                             child: ButtonTheme(
@@ -192,9 +191,9 @@ class _MainModelState extends State<MainModel> {
           ),
           body: Center(
             child: PhotoView(
-              imageProvider: CachedNetworkImage(
-                imageUrl: dataState.list[index].url,
-              ) as ImageProvider,
+              imageProvider: CachedNetworkImageProvider(
+                dataState.list[index].url,
+              ) ,
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(

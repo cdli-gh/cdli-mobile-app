@@ -117,9 +117,9 @@ class _GridModelState extends State<GridModel> {
                         child: GridTile(
                             child: GestureDetector(
                               child: Image(
-                                image: CachedNetworkImage(
-                                  imageUrl: dataState.list[index].url,
-                                ) as ImageProvider,
+                                image: CachedNetworkImageProvider(
+                                  dataState.list[index].url,
+                                ) ,
                                 fit: BoxFit.fitWidth,
                                 loadingBuilder: (context, child, progress) {
                                   return progress == null

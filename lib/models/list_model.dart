@@ -131,9 +131,9 @@ class _ListModelState extends State<ListModel> {
                               maxWidth: 75,
                             ),
                             child: Image(
-                              image: CachedNetworkImage(
-                                imageUrl: dataState.list[index].url,
-                              ) as ImageProvider,
+                              image: CachedNetworkImageProvider(
+                               dataState.list[index].url,
+                              ) ,
                               fit: BoxFit.fitWidth,
                               loadingBuilder: (context, child, progress) {
                                 return progress == null

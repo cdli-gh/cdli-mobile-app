@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
-import 'package:flutter_html/style.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:flutter_html/flutter_html.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -99,22 +98,22 @@ class _TileModelState extends State<TileModel> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Html(
-                            data: dataState.list[position].fullInfo,
-                            style: {
-                              "body": Style(
-                                  color: Colors.black,
-                                  fontFamily: 'NotoSansJP',
-                                  fontSize: FontSize(15))
-                            },
-                            onLinkTap: (url) async {
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
+                          // Html(
+                          //   data: dataState.list[position].fullInfo,
+                          //   style: {
+                          //     "body": Style(
+                          //         color: Colors.black,
+                          //         fontFamily: 'NotoSansJP',
+                          //         fontSize: FontSize(15))
+                          //   },
+                          //   onLinkTap: (url) async {
+                          //     if (await canLaunch(url)) {
+                          //       await launch(url);
+                          //     } else {
+                          //       throw 'Could not launch $url';
+                          //     }
+                          //   },
+                          // ),
                           ButtonTheme(
                             minWidth: 330.0,
                             height: 50.0,
@@ -187,9 +186,9 @@ class _TileModelState extends State<TileModel> {
           ),
           body: Center(
             child: PhotoView(
-              imageProvider: CachedNetworkImage(
-                imageUrl: dataState.list[position].url,
-              ) as ImageProvider,
+              imageProvider: CachedNetworkImageProvider(
+              dataState.list[position].url,
+              ) ,
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(

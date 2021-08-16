@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
-import 'package:flutter_html/style.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -118,22 +115,20 @@ class _ListTileModelState extends State<ListTileModel> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Html(
-                            data: info,
-                            style: {
-                              "body": Style(
-                                  color: Colors.black,
-                                  fontFamily: 'NotoSansJP',
-                                  fontSize: FontSize(15))
-                            },
-                            onLinkTap: (url) async {
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
+                          // Html(
+                          //   data: info,
+                          //   defaultTextStyle: TextStyle(
+                          //       color: Colors.black,
+                          //       fontFamily: 'NotoSansJP',
+                          //       fontSize: 15),
+                          //   onLinkTap: (url) async {
+                          //     if (await canLaunch(url)) {
+                          //       await launch(url);
+                          //     } else {
+                          //       throw 'Could not launch $url';
+                          //     }
+                          //   },
+                          // ),
                           ButtonTheme(
                             minWidth: 330.0,
                             height: 50.0,
@@ -206,9 +201,9 @@ class _ListTileModelState extends State<ListTileModel> {
           ),
           body: Center(
             child: PhotoView(
-              imageProvider: CachedNetworkImage(
-                imageUrl: image,
-              ) as ImageProvider,
+              imageProvider: CachedNetworkImageProvider(
+               image,
+              ),
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(
