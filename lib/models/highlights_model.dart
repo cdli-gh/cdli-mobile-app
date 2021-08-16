@@ -28,14 +28,14 @@ class _HighlightsModelState extends State<HighlightsModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -82,18 +82,20 @@ class _HighlightsModelState extends State<HighlightsModel> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
           CarouselSlider(
-            height: height - 150,
-            initialPage: 0,
-            // enlargeCenterPage: true,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 2000),
-            pauseAutoPlayOnTouch: Duration(seconds: 10),
-            onPageChanged: (index) {
-              setState(() {
-                _current = index;
-              });
-            },
+            options: CarouselOptions(
+              height: height - 150,
+              initialPage: 0,
+              // enlargeCenterPage: true,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 5),
+              autoPlayAnimationDuration: Duration(milliseconds: 2000),
+              pauseAutoPlayOnTouch: true,
+              onPageChanged: (index, CarouselPageChangedReason reason) {
+                setState(() {
+                  _current = index;
+                });
+              },
+            ),
             items: highlights.map((imgAsset) {
               return Builder(
                 builder: (BuildContext context) {

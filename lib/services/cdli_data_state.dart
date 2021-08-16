@@ -26,12 +26,13 @@ class CDLIDataState {
       debugPrint('trying');
       var httpClient = new HttpClient();
       var request = await httpClient.getUrl(
-          Uri.parse('https://cdli.ucla.edu/cdlitablet_android/fetchdata'));
+          Uri.parse('https://cdli.ucla.edu/cdlitablet_android/fetchdata.php'));
       var response = await request.close();
 
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         this.list = CDLIData.fromJsonArray(json);
+        print(json);
         this.loading = false;
         this.error = false;
       }

@@ -9,7 +9,7 @@ class HelpModel extends StatefulWidget {
 
 class _HelpModelState extends State<HelpModel> {
   String id;
-  final db = Firestore.instance;
+  final db = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
   String email;
   String feedback;
@@ -167,10 +167,16 @@ class _HelpModelState extends State<HelpModel> {
                             ButtonTheme(
                               minWidth: 330.0,
                               height: 50.0,
-                              child: RaisedButton(
-                                color: Color.fromRGBO(18, 18, 18, 1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16.0),
+                              child: ElevatedButton(
+                                // color: Color.fromRGBO(18, 18, 18, 1),
+                                // shape: RoundedRectangleBorder(
+                                //   borderRadius: BorderRadius.circular(16.0),
+                                // ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color.fromRGBO(18, 18, 18, 1),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
                                 ),
                                 onPressed: submitFeedback,
                                 //Navigator.pop(context);
@@ -202,8 +208,8 @@ class _HelpModelState extends State<HelpModel> {
       DocumentReference ref = await db
           .collection('cdlitablet')
           .add({'email': '$email', 'feedback': '$feedback'});
-      setState(() => id = ref.documentID);
-      print(ref.documentID);
+      setState(() => id = ref.id);
+      print(ref.id);
       showAlertDialog();
     }
     //Navigator.pop(context);
@@ -240,7 +246,7 @@ class _HelpModelState extends State<HelpModel> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(
                 'Close',
                 style: TextStyle(

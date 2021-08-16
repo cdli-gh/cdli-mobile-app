@@ -1,4 +1,4 @@
-import 'package:cache_image/cache_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cdli_tablet_app/screens/list_tile_screen.dart';
 import 'package:cdli_tablet_app/services/cdli_data.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
@@ -31,14 +31,14 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -102,15 +102,19 @@ class _RecentlyViewedModelState extends State<RecentlyViewedModel> {
                 maxWidth: 75,
               ),
               child: Image(
-                image: CacheImage(item.url),
+                image: CachedNetworkImage(
+                  imageUrl: item.url,
+                ) as ImageProvider,
                 fit: BoxFit.fitWidth,
                 loadingBuilder: (context, child, progress) {
                   return progress == null
                       ? child
                       : new Center(
                           child: PlatformCircularProgressIndicator(
-                            android: (_) => MaterialProgressIndicatorData(),
-                            ios: (_) => CupertinoProgressIndicatorData(
+                            material: (_, __) =>
+                                MaterialProgressIndicatorData(),
+                            cupertino: (_, __) =>
+                                CupertinoProgressIndicatorData(
                               radius: 25,
                             ),
                           ),
