@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
 import 'package:cdli_tablet_app/screens/list_tile_screen.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:cache_image/cache_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ListModel extends StatefulWidget {
   @override
@@ -29,14 +29,14 @@ class _ListModelState extends State<ListModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(new SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
       content: new Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -131,7 +131,9 @@ class _ListModelState extends State<ListModel> {
                               maxWidth: 75,
                             ),
                             child: Image(
-                              image: CacheImage(dataState.list[index].url),
+                              image: CachedNetworkImageProvider(
+                               dataState.list[index].url,
+                              ) ,
                               fit: BoxFit.fitWidth,
                               loadingBuilder: (context, child, progress) {
                                 return progress == null
@@ -139,9 +141,9 @@ class _ListModelState extends State<ListModel> {
                                     : new Center(
                                         child:
                                             PlatformCircularProgressIndicator(
-                                        android: (_) =>
+                                        material: (_, __) =>
                                             MaterialProgressIndicatorData(),
-                                        ios: (_) =>
+                                        cupertino: (_, __) =>
                                             CupertinoProgressIndicatorData(
                                                 radius: 25),
                                       ));

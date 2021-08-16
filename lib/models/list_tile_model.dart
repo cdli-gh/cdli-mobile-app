@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cdli_tablet_app/services/cdli_data_state.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:cdli_tablet_app/services/cdli_data.dart';
-import 'package:cache_image/cache_image.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ListTileModel extends StatefulWidget {
   final title;
@@ -59,14 +57,14 @@ class _ListTileModelState extends State<ListTileModel> {
   }
 
   void _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     dataState.reset();
     setState(() {});
     getDataFromApi();
   }
 
   void _showError() {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         'Check your connection and try again.',
         style: TextStyle(
@@ -117,27 +115,29 @@ class _ListTileModelState extends State<ListTileModel> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Html(
-                            data: info,
-                            defaultTextStyle: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'NotoSansJP',
-                                fontSize: 15),
-                            onLinkTap: (url) async {
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw 'Could not launch $url';
-                              }
-                            },
-                          ),
+                          // Html(
+                          //   data: info,
+                          //   defaultTextStyle: TextStyle(
+                          //       color: Colors.black,
+                          //       fontFamily: 'NotoSansJP',
+                          //       fontSize: 15),
+                          //   onLinkTap: (url) async {
+                          //     if (await canLaunch(url)) {
+                          //       await launch(url);
+                          //     } else {
+                          //       throw 'Could not launch $url';
+                          //     }
+                          //   },
+                          // ),
                           ButtonTheme(
                             minWidth: 330.0,
                             height: 50.0,
-                            child: RaisedButton(
-                              color: Color.fromRGBO(18, 18, 18, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color.fromRGBO(18, 18, 18, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
                               ),
                               onPressed: () {
                                 share(thumbnail, shortInfo, title);
@@ -201,12 +201,15 @@ class _ListTileModelState extends State<ListTileModel> {
           ),
           body: Center(
             child: PhotoView(
-              imageProvider: CacheImage(image),
+              imageProvider: CachedNetworkImageProvider(
+               image,
+              ),
               loadingBuilder: (context, progress) => Center(
                   child: Container(
                       child: PlatformCircularProgressIndicator(
-                android: (_) => MaterialProgressIndicatorData(),
-                ios: (_) => CupertinoProgressIndicatorData(radius: 25),
+                material: (_, __) => MaterialProgressIndicatorData(),
+                cupertino: (_, __) =>
+                    CupertinoProgressIndicatorData(radius: 25),
               ))),
             ),
           ),
@@ -235,7 +238,7 @@ class _ListTileModelState extends State<ListTileModel> {
   }
 
   void showSnackBar(BuildContext context) {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Saved to collection',
             style: TextStyle(
               fontFamily: 'NotoSansJP',

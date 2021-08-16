@@ -32,6 +32,7 @@ class CDLIDataState {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         this.list = CDLIData.fromJsonArray(json);
+        print(json);
         this.loading = false;
         this.error = false;
       }
